@@ -59,7 +59,7 @@ function includeHtmlAsync(url, selector, addType) {
     $.ajax({
         url: url,
         dataType: 'text',
-        async: false
+        async: true
     }).done(function (msg) {
         if (addType === "append") {
             $(selector).append(msg);

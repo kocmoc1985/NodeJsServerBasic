@@ -6,13 +6,13 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Menu</title>
+        <title>TestTemplates</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="../../css/all.css" type="text/css"/>
-        <link rel="stylesheet" href="navbar.css" type="text/css"/>
-        <script src="navbar.js"></script>
+        <link rel="stylesheet" href="css/all.css" type="text/css"/>
+        <link rel="stylesheet" href="navbars/navbarA/navbar.css" type="text/css"/>
+        <script src="navbars/navbarA/navbar.js"></script>
     </head>
 
     <body onresize="displayViewPortWidthHeight('example-container')"> 
@@ -24,13 +24,14 @@ and open the template in the editor.
 
             $(document).ready(function () {
                 //
-                includeHtml("navbar.html", "#menu-container");
+                includeHtml("navbars/navbarA/navbar.html", "#menu-container");
                 //
                 navBarFixedPositionFix("menu-container", "example-container");
                 //
-                includeHtml("../../footers/footerA/footerA.html", "#footer-container-main");
-                //
                 addEventsToLinks();
+                //
+                includeHtmlAsync("footers/footerA/footerA.html", "#footer-container-main");
+                //
             });
 
             // facebook like button

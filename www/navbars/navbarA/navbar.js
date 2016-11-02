@@ -108,4 +108,24 @@ function includeHtml(url, selector, addType) {
     }
 }
 
+function includeHtmlAsync(url, selector, addType) {
+    $.ajax({
+        url: url,
+        dataType: 'text',
+        async: true
+    }).done(function (msg) {
+        if (addType === "append") {
+            $(selector).append(msg);
+        } else if (addType === "prepend") {
+            $(selector).prepend(msg);
+        } else if (addType === "after") {
+            $(selector).after(msg);
+        } else if (addType === "before") {
+            $(selector).before(msg);
+        } else {
+            $(selector).append(msg);
+        }
+    });
+}
+
 //===============================NAVBAR=========================================
