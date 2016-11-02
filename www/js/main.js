@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 //Executes last
 $(window).load(function () {
-   
+
 });
 
 
@@ -73,6 +73,13 @@ function includeHtmlAsync(url, selector, addType) {
             $(selector).append(msg);
         }
     });
+}
+
+//==============================================================================
+//==============================================================================
+
+function getRandomInt(betweenA, betweenB) {
+    return Math.floor((Math.random() * betweenB) + betweenA);
 }
 
 //==============================================================================

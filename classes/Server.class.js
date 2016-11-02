@@ -85,7 +85,7 @@ function connectMySql(ip,user,pass,dbname,response){
     //
     connectionMySql.connect(function(err){
         if(!err) {
-            console.log("Database is connected ... nn");
+            console.log("Database is connected ...");
             //           
             //
             if(response !== null){
@@ -109,7 +109,8 @@ function executeSelect(connection,query,response){
     console.log("Processing query:" + query);
     //
     connection.query(query, function(err, rows, fields) {
-//    connection.end();
+    //
+    //    connection.end();
     //
     if (!err)
         //
@@ -130,7 +131,6 @@ function executeSelect(connection,query,response){
   });
     //
 }
-
 
 //==============================================================================
 //==============================================================================
