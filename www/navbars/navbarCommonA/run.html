@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="../../css/all.css" type="text/css"/>
         <link rel="stylesheet" href="navbar.css" type="text/css"/>
         <script src="navbar.js"></script>
     </head>
@@ -27,16 +28,30 @@ and open the template in the editor.
                 //
                 navBarFixedPositionFix("menu-container", "example-container");
                 //
+                includeHtml("../../footers/footerA/footerA.html", "#footer-container-main");
+                //
                 addEventsToLinks();
             });
+
+            // facebook like button
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/sv_SE/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
         </script>
 
 
         <div class="menu-container" id="menu-container"></div>
 
-
         <div class="example-container" id="example-container"></div>
+
+        <div class="footer-container-main" id="footer-container-main"></div>
 
     </body>
 </html>
