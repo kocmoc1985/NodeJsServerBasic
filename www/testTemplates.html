@@ -10,16 +10,16 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/all.css" type="text/css"/>
         <link rel="stylesheet" href="navbars/navbarA/navbar.css" type="text/css"/>
+        <link rel="stylesheet" href="css/all.css" type="text/css"/>
         <script src="navbars/navbarA/navbar.js"></script>
     </head>
 
-    <body onresize="displayViewPortWidthHeight('example-container')"> 
+    <body onresize="displayViewPortWidthHeight('sidebar-content')"> 
 
         <script language = "javascript">
             function displayViewPortWidthHeight(elementId) {
-                document.getElementById(elementId).innerHTML = "width:" + $(document).width() + "<br>" + "height: " + $(document).height();
+                // document.getElementById(elementId).innerHTML = "width:" + $(document).width() + "<br>" + "height: " + $(document).height();
             }
 
             $(document).ready(function () {
@@ -30,7 +30,9 @@ and open the template in the editor.
                 //
                 addEventsNavbar();
                 //
-                includeHtmlAsync("footers/footerA/footerA.html", "#footer-container-main");
+                includeHtml("layouts/sidebarContentA/sidebarContent.html", "#sidebar-content");
+                //
+                includeHtml("footers/footerA/footerA.html", "#footer-container-main");
                 //
             });
 
@@ -50,7 +52,7 @@ and open the template in the editor.
 
         <div class="menu-container" id="menu-container"></div>
 
-        <div class="example-container" id="example-container"></div>
+        <div class="sidebar-content" id="sidebar-content"></div>
 
         <div class="footer-container-main" id="footer-container-main"></div>
 
