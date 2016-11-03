@@ -9,7 +9,7 @@ function addClickEventToNavBarBtn(selector, functionToExecute) {
 }
 
 
-function addEventsToLinks() {
+function addEventsNavbar() {
     $(".a-mobile-onclick-expand").click(function(event) {
         event.preventDefault();
         fadeIn(this);
@@ -30,10 +30,9 @@ function addEventsToLinks() {
 /**
  * This one is needed if you want to have "fixed" position for the NavBar
  * @param {type} navBarContainerId - the id of the container
- * @param {type} elemToSetMarginTopOn - id of the element which is direct under the navbar
  * @returns {unresolved}
  */
-function navBarFixedPositionFix(navBarContainerId, elemToSetMarginTopOn) {
+function navBarFixedPositionFix(navBarContainerId) {
     //
     var pos = $("#" + navBarContainerId).css("position");
     //
@@ -42,8 +41,7 @@ function navBarFixedPositionFix(navBarContainerId, elemToSetMarginTopOn) {
     }
     //
     var height = $("#" + navBarContainerId).outerHeight();
-    var elemMarginTop = document.getElementById(elemToSetMarginTopOn);
-    elemMarginTop.style.marginTop = (height) + "px";
+    $("#" + navBarContainerId).next().css('margin-top',height + "px");;
 }
 
 function fadeIn(element) {

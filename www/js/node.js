@@ -1,6 +1,6 @@
 $(document).ready(function () {
     node_test_basic();
-    node_test_sql_basic("select * from articles","executeSelect");
+//    node_test_sql_basic("select * from articles","executeSelect");
 });
 
 function node_test_basic() {
