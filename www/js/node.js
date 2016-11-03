@@ -1,7 +1,20 @@
-$(document).ready(function () {
-    node_test_basic();
-//    node_test_sql_basic("select * from articles","executeSelect");
-});
+/**
+ * var array = executeSync("select * from blogg", "executeSelect");
+ * @param {type} query
+ * @param {type} nodePar
+ * @returns {Array|Object}
+ */
+function executeSync(query, nodePar) {
+    var jsonStr =  $.ajax({
+        async: false, //is true by default
+        type: "POST",
+        url: "http://localhost:3000/" + nodePar,
+        data: {query: query}
+    }).responseText;
+    //
+    return JSON.parse(jsonStr);
+}
+
 
 function node_test_basic() {
     //
