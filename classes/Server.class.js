@@ -4,7 +4,7 @@ module.exports = class Server {
   constructor() {
     // save our settings to this
     this.settings = g.settings.Server;
-
+    
     // add express to this
     this.app = m.express();
 
@@ -32,7 +32,7 @@ module.exports = class Server {
     // for example from "standard" HTML forms
     this.app.use(m.bodyparser.urlencoded({extended: false}));
 
-    // listen on port 3000
+   
     var me = this;
 
 //==============================================================================
@@ -68,10 +68,16 @@ this.app.post('/executeSelect', function (req, res) {
     //
     executeSelect(connectionMySql,query,res);
 });
-    
- 
-connectMySql("localhost","root","","vedalife_se",null);
 
+//==============================================================================<
+
+var s = g.settings.SQL;
+    
+if(s.connect === 'true'){
+    connectMySql(s.host,s.user,s.pass,s.database,null);
+} 
+
+//==============================================================================<
 
 function connectMySql(ip,user,pass,dbname,response){
     console.log("Connecting to DB");
@@ -134,7 +140,7 @@ function executeSelect(connection,query,response){
 
 //==============================================================================
 //==============================================================================
-    
+   // listen on port 3000
     this.app.listen(this.settings.port,  function() {
       console.log("Server listening on port "+me.settings.port);
     });
