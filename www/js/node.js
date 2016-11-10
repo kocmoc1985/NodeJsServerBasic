@@ -15,6 +15,24 @@ function executeSync(query, nodePar) {
     return JSON.parse(jsonStr);
 }
 
+/**
+ * Not sure it's a good idea to send connection parameters from client side
+ * @returns {undefined}
+ */
+function node_client_connect_db() {
+    $.ajax({
+        async: "true",
+        type: "POST",
+        url: "http://localhost:3000/connectMySql",
+        data: {ip: "localhost", user: "root", pass: "", database: "vedalife_se"}
+    }).done(function (msg) {
+        processNodeResponse(msg);
+    });
+}
+
+
+//==============================================================================
+//==============================================================================
 
 function node_test_basic() {
     //
@@ -62,17 +80,4 @@ function node_test_sql_basic_resp(rowsAsJson) {
     $(".test-div-a").append("<div class='test-div-response'>" + " sql test: " + title + "</div>");
 }
 
-/**
- * Not sure it's a good idea to send connection parameters from client side
- * @returns {undefined}
- */
-function node_client_connect_db() {
-    $.ajax({
-        async: "true",
-        type: "POST",
-        url: "http://localhost:3000/connectMySql",
-        data: {ip: "localhost", user: "root", pass: "", database: "vedalife_se"}
-    }).done(function (msg) {
-        processNodeResponse(msg);
-    });
-}
+

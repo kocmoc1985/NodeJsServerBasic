@@ -75,6 +75,18 @@ function includeHtmlAsync(url, selector, addType) {
     });
 }
 
+function loadHtml(url) {
+    //
+    var html = $.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'html',
+        async: false
+    }).responseText;
+    //
+    return html;
+}
+
 //==============================================================================
 //==============================================================================
 
@@ -95,4 +107,28 @@ function isScrolledIntoView(selector) {
 
 function isVisible(selector) {
     return $(selector).is(':visible');
+}
+
+function scrollToElementSmooth(selector) {
+    $('html, body').animate({
+        scrollTop: $(selector).offset().top - 20
+    }, 1000);
+}
+
+//==============================================================================
+//==============================================================================
+
+var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var formatYYY_mm_dd = "#year-#month-#day";
+var formatDD_mm_YYYY = "#day/#month/#year";
+
+function getCurrentDate(format) {
+    var d = new Date();
+    return format.replace("#year", d.getFullYear()).replace("#month", months[d.getMonth()]).replace("#day", d.getDate());
+}
+
+function getDateGivenFormat(date, format) {
+    var d = new Date(date);
+    return format.replace("#year", d.getFullYear()).replace("#month", months[d.getMonth()]).replace("#day", d.getDate());
 }
