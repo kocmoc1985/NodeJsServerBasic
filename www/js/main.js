@@ -75,6 +75,11 @@ function includeHtmlAsync(url, selector, addType) {
     });
 }
 
+/**
+ * To convert the rcieved html string into jquery object use: var obj = $(responseText)
+ * @param {type} url
+ * @returns {jqXHR.responseText}
+ */
 function loadHtml(url) {
     //
     var html = $.ajax({
@@ -113,6 +118,14 @@ function scrollToElementSmooth(selector) {
     $('html, body').animate({
         scrollTop: $(selector).offset().top - 20
     }, 1000);
+}
+//==============================================================================
+//==============================================================================
+
+function sortArrayByDate(blogsArray) {
+    blogsArray.sort(function (a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
 }
 
 //==============================================================================
