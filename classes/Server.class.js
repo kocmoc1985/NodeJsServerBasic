@@ -140,6 +140,74 @@ function executeSelect(connection,query,response){
 
 //==============================================================================
 //==============================================================================
+
+function getFileName(clientId){
+     return "taskList_" + clientId + ".json";
+ }
+ 
+ var fs  = require('fs');
+
+this.app.post('/writeJsonToFile', function (req, res) {
+    //
+    var text = req.body.param1;
+    var index = req.body.param2;
+    var clientId = req.body.param3;
+    //
+    var entry = {
+        table: []
+    };
+    //
+    entry.table.push({index: index,text: text,done:'false'});
+    //
+    var json = JSON.stringify(entry);
+    //
+    fs.readFile(getFileName(clientId), 'utf8', function (err, data){
+    if (err){
+         fs.writeFile(getFileName(clientId), json, 'utf8', function(err,data){
+         res.end("");
+         fs.close(2);
+        });
+    } else {
+        var obj = JSON.parse(data); //now it an object
+        obj.table.push({index: index,text: text, done:'false'}); //add some data
+        json = JSON.stringify(obj); //convert it back to json
+        fs.writeFile(getFileName(clientId), json, 'utf8', function(err, data){
+            res.end("");
+            fs.close(2);
+        });
+    }
+    //
+ });
+});
+
+this.app.post('/readJsonFromFile', function (req, res) {
+        //
+        var clientId = req.body.param1;
+        //
+        fs.readFile(getFileName(clientId), 'utf8', function (err, data){
+            if (err){
+             res.end("");
+             fs.close(2);
+        } else {
+            var json = JSON.parse(data);
+            res.json(json);
+        }
+    });
+});
+
+this.app.post('/deleteFile', function (req, res) {
+    //
+    var clientId = req.body.param1;
+    //
+    fs.unlink(getFileName(clientId),function (){
+        res.end("");
+        fs.close(2);
+    });
+    //
+});
+
+//==============================================================================
+//==============================================================================
    // listen on port 3000
     this.app.listen(this.settings.port,  function() {
       console.log("Server listening on port "+me.settings.port);
