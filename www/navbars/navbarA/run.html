@@ -17,23 +17,28 @@ and open the template in the editor.
     <body onresize="displayViewPortWidthHeight('example-container')"> 
 
         <script language = "javascript">
+            
             function displayViewPortWidthHeight(elementId) {
                 document.getElementById(elementId).innerHTML = "width:" + $(document).width() + "<br>" + "height: " + $(document).height();
             }
-
+            
             $(document).ready(function () {
                 //
-                includeHtml("navbar.html", "#menu-container");
+                includeNavbar("navbar.html", "#menu-container");
                 //
-                navBarFixedPositionFix("menu-container", "example-container");
+                addClickEventToNavBarBtn(".products-link", linkClickedTest);
                 //
-                addEventsToLinks();
             });
+            
+            function linkClickedTest(){
+                alert("Link cliked");
+            }
 
         </script>
 
 
         <div class="menu-container" id="menu-container"></div>
+
 
         <div class="example-container" id="example-container"></div>
 

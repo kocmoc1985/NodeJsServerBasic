@@ -1,31 +1,63 @@
 //===============================NAVBAR=========================================
+$(window).load(function () {
+    checkDOMChange();
+});
 
+var TO_HIDE = ["ABOUT"];
+var navBarFixedPosPrevElem;
 
-function addClickEventToNavBarBtn(selector, functionToExecute) {
-    $(selector).click(function(event) {
-        event.preventDefault();
-        functionToExecute();
-    });
+function checkDOMChange() {
+    //
+    if (exists($("#menu-container").next()) && $(navBarFixedPosPrevElem).get(0) !== $("#menu-container").next().get(0)) {
+        //
+        navBarFixedPositionFix("menu-container");
+        navBarFixedPosPrevElem = $("#menu-container").next();
+        //
+        //
+
+        //
+    }
+    //
+    setTimeout(checkDOMChange, 100);
 }
 
 
-function addEventsNavbar() {
-    $(".a-mobile-onclick-expand").click(function(event) {
+function hideNavBarButtons() {
+    $('.a-can-be-active').each(function () {
+        for (var i = 0; i < TO_HIDE.length; i++) {
+            if ($(this).text() === TO_HIDE[i]) {
+                $(this).remove();
+            }
+        }
+    });
+}
+
+/**
+ * This must be called after "including" of the navbar.html
+ * @returns {undefined}
+ */
+function addEventsToLinks() {
+    $("body").on('click', ".a-mobile-onclick-expand", function (event) {
         event.preventDefault();
         fadeIn(this);
     });
 
-
-    $(".a-can-be-active").click(function() {
+    $("body").on('click', '.a-can-be-active', function () {
         setActive(this);
     });
 
     //Hiding mobile menu if clicked on Menu/Company title
-    $(".ul-mobile .menu-title").click(function() {
+    $("body").on('click', ".ul-mobile .menu-title", function () {
         $(".ul-mobile ul").hide();
     });
 }
 
+function addClickEventToNavBarBtn(selector, functionToExecute) {
+    $("body").on('click', selector, function (event) {
+        event.preventDefault();
+        functionToExecute();
+    });
+}
 
 /**
  * This one is needed if you want to have "fixed" position for the NavBar
@@ -41,7 +73,7 @@ function navBarFixedPositionFix(navBarContainerId) {
     }
     //
     var height = $("#" + navBarContainerId).outerHeight();
-    $("#" + navBarContainerId).next().css('margin-top',height + "px");;
+    $("#" + navBarContainerId).next().css('margin-top', height + "px");
 }
 
 function fadeIn(element) {
@@ -85,7 +117,8 @@ function imageNotFound(imgElement) {
     $(parent).text(".....");
 }
 
-function includeHtml(url, selector, addType) {
+
+function includeNavbar(url, selector, addType) {
     //
     var html = $.ajax({
         url: url,
@@ -104,26 +137,19 @@ function includeHtml(url, selector, addType) {
     } else {
         $(selector).append(html);
     }
+    //
+    hideNavBarButtons();
+    //
+    addEventsToLinks();
+    //
 }
 
-function includeHtmlAsync(url, selector, addType) {
-    $.ajax({
-        url: url,
-        dataType: 'text',
-        async: true
-    }).done(function (msg) {
-        if (addType === "append") {
-            $(selector).append(msg);
-        } else if (addType === "prepend") {
-            $(selector).prepend(msg);
-        } else if (addType === "after") {
-            $(selector).after(msg);
-        } else if (addType === "before") {
-            $(selector).before(msg);
-        } else {
-            $(selector).append(msg);
-        }
-    });
+function exists(selector) {
+    if ($(selector).length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //===============================NAVBAR=========================================
