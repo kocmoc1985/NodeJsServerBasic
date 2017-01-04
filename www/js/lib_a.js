@@ -76,8 +76,31 @@ function loadTemplate(url) {
 }
 //==============================================================================
 //==============================================================================
+function linkNotFound(obj) {
+    var src = $(obj).attr("src");
+    var href = $(obj).attr("href");
+
+    if (src) {
+        alert("NOT FOUND:" + $(obj).attr("src"));
+    }
+    
+    if(href){
+        alert("NOT FOUND:" + $(obj).attr("href"));
+    }
+
+
+}
+
 function exists(selector) {
     if ($(selector).length) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function stringContains(string, searched_string) {
+    if (string.indexOf(searched_string) > -1) {
         return true;
     } else {
         return false;

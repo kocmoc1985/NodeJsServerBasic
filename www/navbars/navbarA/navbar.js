@@ -115,6 +115,9 @@ function imageNotFound(imgElement) {
     parent.removeChild(imgElement);
     $(parent).css("font-size", "14pt");
     $(parent).text(".....");
+    //
+//    var path = node_get_file_path("www","menu-mobile.png");
+//    $(imgElement).attr("src",path);
 }
 
 

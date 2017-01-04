@@ -205,6 +205,67 @@ this.app.post('/deleteFile', function (req, res) {
     });
     //
 });
+//==============================================================================
+//==============================================================================
+
+this.app.post('/getFilePath', function (req, res) {
+    //
+    var path = req.body.param1;
+    var searchedFileName = req.body.param2;
+    //
+    walk(path, function (err, results) {//process.env.HOME
+        //
+        if (err)
+            throw err;
+        //
+        for (var i = 0; i < results.length; i++) {
+//            console.log(results[i]);
+            if (stringContains(results[i], searchedFileName)) {
+               res.end(results[i].split(path + "\\")[1]);// making relative path with split
+               fs.close(2);
+            }
+        }
+    });
+    //
+});
+
+//Parallel loop - fastest
+//var fs = require('fs');
+var path = require('path');
+var walk = function (dir, done) {
+    var results = [];
+    fs.readdir(dir, function (err, list) {
+        if (err)
+            return done(err);
+        var pending = list.length;
+        if (!pending)
+            return done(null, results);
+        list.forEach(function (file) {
+            file = path.resolve(dir, file);
+            fs.stat(file, function (err, stat) {
+                if (stat && stat.isDirectory()) {
+                    walk(file, function (err, res) {
+                        results = results.concat(res);
+                        if (!--pending)
+                            done(null, results);
+                    });
+                } else {
+                    results.push(file);
+                    if (!--pending)
+                        done(null, results);
+                }
+            });
+        });
+    });
+};
+
+function stringContains(string, searched_string) {
+    if (string.indexOf(searched_string) > -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //==============================================================================
 //==============================================================================
@@ -213,6 +274,5 @@ this.app.post('/deleteFile', function (req, res) {
       console.log("Server listening on port "+me.settings.port);
     });
   }
-  
   
 }

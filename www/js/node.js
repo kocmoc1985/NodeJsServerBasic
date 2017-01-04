@@ -1,4 +1,27 @@
 /**
+ * Will search for given file in the "www" folder
+ * @param {String} path = ex: "www"
+ * @param {String} fileName = "menu-mobile.png"
+ * @returns {jqXHR.responseText}
+ */
+function node_get_file_path(path, fileName) {
+    //
+    var param = "getFilePath";
+    //
+    var rst = $.ajax({
+        async: false,
+        type: "POST",
+        url: "http://localhost:3000/" + param,
+        data: {param1: path, param2: fileName}
+    }).responseText;
+    //
+    return rst;
+}
+
+//==============================================================================
+//==============================================================================
+
+/**
  * var array = executeSync("select * from blogg", "executeSelect");
  * @param {type} query
  * @param {type} nodePar
@@ -30,9 +53,10 @@ function node_client_connect_db() {
     });
 }
 
+//==============================================================================
+//==============================================================================
 
-//==============================================================================
-//==============================================================================
+
 
 function node_test_basic() {
     //
@@ -48,9 +72,19 @@ function node_test_basic() {
     });
 }
 
-function node_test_basic_response(response) {
+function node_test_basic_response(response, title) {
     //
-    $(".test-div-a").append("<div class='test-div-response'>" + response + "</div>");
+    var testDivResponse = $("<div class='test-div-response'></div>");
+    //
+    if (title) {
+        var h2 = $("<h5>" + title + "</h5>");
+        $(testDivResponse).append(h2);
+    }
+    //
+    var response_ = $("<p>"+ response + "</p>");
+    //
+    $(testDivResponse).append(response_);
+    $(".test-div-a").append(testDivResponse);
     //
 }
 
@@ -60,7 +94,7 @@ function node_test_basic_response(response) {
  * @param {type} nodePar  = executeSelect
  * @returns {undefined}
  */
-function node_test_sql_basic(query,nodePar) {
+function node_test_sql_basic(query, nodePar) {
     $.ajax({
         async: "true", //is true by default
         type: "POST",
