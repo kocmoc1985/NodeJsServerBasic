@@ -34,6 +34,26 @@ module.exports = class Server {
 
    
     var me = this;
+    
+//==============================================================================
+//=============================GET EXAMPLES=====================================  
+ /**
+ * http://localhost:3000/testGetA/:aaaaa/:bbbbb
+ */
+this.app.get('/testGetA/:message/:message2', function (req, res) {
+    var par1 = req.params.message;
+    var par2 = req.params.message2;
+    //
+    res.send("answer: " + par1 + " / " + par2);
+});
+
+
+this.app.get('/testGetB', function (req, res) {
+    var par1 = req.query.param1;
+    var par2 = req.query.param2;
+    //
+    res.send("answer: " + par1 + " / " + par2);
+});
 
 //==============================================================================
 //==============================================================================
