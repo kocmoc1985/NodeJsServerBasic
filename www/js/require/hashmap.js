@@ -37,8 +37,6 @@ function Map() {
         for (var i = 0; i < len; i++) {
             var k = this.keys[i];
             if(this.data[k] === undefined){
-                console.log("data = null" + " / i: " + i + " / " + this.keys[i]);
-                console.log(this.keys);
               continue;
             }
             fn(k, this.data[k], i);
